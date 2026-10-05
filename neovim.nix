@@ -1,14 +1,15 @@
 final: prev: 
 let
-  nvimConfigPath = "/home/piq9117/dotfiles/overlays/nvim/";
+  nvimConfigPath = "/home/piq9117/dotfiles/overlays/nvim";
 in {
   neovim = prev.neovim.override { 
     viAlias = true;
     vimAlias = true;
     configure = {
       customRC = ''
-	source ${nvimConfigPath}/theme.lua
-        source ${nvimConfigPath}/mappings.lua
+        set mouse=
+	source ${nvimConfigPath}/themes.lua
+	source ${nvimConfigPath}/mappings.lua
         source ${nvimConfigPath}/gitsigns.lua
 	source ${nvimConfigPath}/lualine.lua
 	source ${nvimConfigPath}/lspconfig.lua
@@ -23,8 +24,9 @@ in {
 	source ${nvimConfigPath}/oil.lua
 	source ${nvimConfigPath}/toggleterm.lua
 	source ${nvimConfigPath}/greeter.lua
-	source ${nvimConfigPath}/markdown.lua
+	source ${nvimConfigPath}/hop.lua
       '';
+
       packages.main.start = with final.vimPlugins; [
         cmp-nvim-lsp
 	cmp-path
@@ -54,10 +56,15 @@ in {
 	toggleterm-nvim
 	alpha-nvim
         mkdnflow-nvim
-
+	vim-jinja
+	hop-nvim
 
 	# themes
+	onedark-nvim
 	catppuccin-nvim
+	monokai-pro-nvim
+	nightfox-nvim
+	vscode-nvim
 
 	(nvim-treesitter.withPlugins (p: 
 	[
@@ -74,8 +81,8 @@ in {
 	  p.vim 
 	  p.bash
 	  p.thrift
-	  p.opentofu
-	  p.rust
+	  p.c
+	  p.vue
 	]))
       ];
     };
